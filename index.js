@@ -6,7 +6,7 @@ const port = 3000;
 
 // middleware
 const saudacao = require("./saudacaoMid");
-app.use(saudacao('Matheus'))
+app.use(saudacao("Matheus"));
 
 /*  Vincule middlewares de nível
 do aplicativo a uma instância 
@@ -27,6 +27,34 @@ app.use((req, res, next) => {
   console.log("Antes...");
   next();
 });
+
+// Lendo Dados da Requisição
+app.get("/clientes/relatorio", (req, res) => {
+    // http://localhost:3000/clientes/relatorio?completo=true&ano=2018
+    res.send(`Cliente relatório: completo = ${req.query.completo}, ano = ${req.query.ano}`)
+});
+
+// corpo da requisição
+app.post('/corpo', (req, res) => {
+    let corpo = ''
+    req.on('data', function(parte) {
+        corpo += parte
+    })
+
+    req.on('end', function(parte) {
+        res.send(corpo)
+    })
+})
+
+// :id - pode mudar na url
+app.get("/clientes/:id", (req, res) => {
+  // enviar
+  res.send(`Cliente ${req.params.id} selecionado!`);
+  // tudo que vem da requisição fica em "params."
+  // get: params na url
+  // post: no corpo da requisição
+});
+
 
 // use - all
 app.get("/", (req, res, next) => {
