@@ -4,6 +4,10 @@ const app = express();
 // port
 const port = 3000;
 
+// middleware
+const saudacao = require("./saudacaoMid");
+app.use(saudacao('Matheus'))
+
 /*  Vincule middlewares de nível
 do aplicativo a uma instância 
 do objeto app usando as funções 
@@ -37,7 +41,7 @@ app.get("/", (req, res, next) => {
     count: 3,
   });
 
-  next()
+  next();
 
   // res.send("<h2>Start🌑</h2>");
 
@@ -48,9 +52,9 @@ app.get("/", (req, res, next) => {
   // })
 });
 
-app.use((req, res ) => {
-    console.log("Depois...");
-  });
+app.use((req, res) => {
+  console.log("Depois...");
+});
 
 // carregar o express
 app.listen(port, () => {
