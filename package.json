@@ -1,0 +1,32 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "Express - Cod3r Cursos",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon",
+    "production": "pm2 start index.js --name --appx-backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateushenriquedasilva/express.git"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "javascript"
+  ],
+  "author": "Matheus H",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mateushenriquedasilva/express/issues"
+  },
+  "homepage": "https://github.com/mateushenriquedasilva/express#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "pm2": "^5.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
