@@ -1,6 +1,9 @@
 const express = require("express");
 // instaciar o express
 const app = express();
+// body parser
+const bodyParser = require("body-parser");
+
 // port
 const port = 3000;
 
@@ -22,6 +25,11 @@ em letras minúsculas.*/
 
 // função middleware
 
+app.use(bodyParser.text());
+app.use(bodyParser.json());
+// formulário
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // o next chama a próxima função
 app.use((req, res, next) => {
   console.log("Antes...");
@@ -30,21 +38,28 @@ app.use((req, res, next) => {
 
 // Lendo Dados da Requisição
 app.get("/clientes/relatorio", (req, res) => {
-    // http://localhost:3000/clientes/relatorio?completo=true&ano=2018
-    res.send(`Cliente relatório: completo = ${req.query.completo}, ano = ${req.query.ano}`)
+  // http://localhost:3000/clientes/relatorio?completo=true&ano=2018
+  res.send(
+    `Cliente relatório: completo = ${req.query.completo}, ano = ${req.query.ano}`
+  );
 });
 
 // corpo da requisição
-app.post('/corpo', (req, res) => {
-    let corpo = ''
-    req.on('data', function(parte) {
-        corpo += parte
-    })
+app.post("/corpo", (req, res) => {
+  // sem body parser
+  //   let corpo = "";
+  //   req.on("data", function (parte) {
+  //     corpo += parte;
+  //   });
+  //   req.on("end", function (parte) {
+  //     res.send(corpo);
+  //   });
+  //   com body parser
 
-    req.on('end', function(parte) {
-        res.send(corpo)
-    })
-})
+  //   res.send(req.body.nome);
+  //   res.send(req.body);
+  res.send(JSON.stringify(req.body));
+});
 
 // :id - pode mudar na url
 app.get("/clientes/:id", (req, res) => {
@@ -54,7 +69,6 @@ app.get("/clientes/:id", (req, res) => {
   // get: params na url
   // post: no corpo da requisição
 });
-
 
 // use - all
 app.get("/", (req, res, next) => {
