@@ -17,8 +17,24 @@ em letras minúsculas.*/
 /* app.get('url', (req, res)) */
 
 // use - all
-app.get('/get', (req, res) => {
-  res.send("<h2>Start🌑</h2>");
+app.get('/', (req, res) => {
+    res.json({
+        data: [
+            {id: 7, name: 'Ana', position: 1},
+            {id: 34, name: 'Bia', position: 2},
+            {id: 17, name: 'Carlos', position: 3}
+        ],
+
+        count: 3
+    })
+
+    // res.send("<h2>Start🌑</h2>");
+
+    // res.json({
+    //     name: 'iPad 32g',
+    //     price: 1899.00,
+    //     discount: 0.12
+    // })
 });
 
 // carregar o express
